@@ -8,15 +8,53 @@
 
 <body>
     <div id="app">
-        <p>{{ message }}</p>
+        <!--<p>{{ message }}</p>
+        <input v-model="message">-->
+        <!--<ul>
+            <li v-for="todo in todos">{{ todo.text }}</li>
+        </ul>-->
+        <!--<p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>-->
+        <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+        <ul>
+            <li v-for="todo in todos">
+                <span>{ todo.text }</span>
+                <button v-on:click="removeTodo($index)">X</button>
+            </li>
+        </ul>
+        </input>
     </div>
-    <input v-model="message">
     <script src="vue.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
-                message: "Hello Vue.js!"
+                // message: "Hello Vue.js!"
+                // todos: [
+                //     { text: 'Learn JavaScript' },
+                //     { text: 'Learn Vue.js' },
+                //     { text: 'Build Something Awesome' },
+                // ]
+                // message: 'Hello Vue.js!'
+                newTodo: '',
+                todos: [
+                    { text: 'Add some todos' }
+                ]
+            },
+            methods: {
+                // reverseMessage: function() {
+                //     this.message = this.message.split('').reverse().join('')
+                // }
+                addTodo: function () {
+                    var text = this.newTodo.trim();
+                    if (text) {
+                        this.todos.push({ text: text })
+                        this.newTodo = ''
+                    }
+                },
+                removeTodo: function (index) {
+                    this.todos.splice(index, 1)
+                }
             }
         })
     </script>
